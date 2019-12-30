@@ -61,7 +61,6 @@ export default class LoginPage extends React.Component {
   tryLogin() {
     this.setState({ isLoading: true, message: "" });
     const { email, password } = this.state;
-    console.log(email, password, "asdasdasdasda");
 
     const loginUserSuccess = user => {
       this.setState({ message: "Sucesso!" });
@@ -78,7 +77,6 @@ export default class LoginPage extends React.Component {
       .signInWithEmailAndPassword(email, password)
       .then(loginUserSuccess)
       .catch(error => {
-        console.log(error, "asdasddasdasdasdasd22");
         if (error.code === "auth/user-not-found") {
           Alert.alert(
             "Usuário não encontrado",
@@ -128,7 +126,7 @@ export default class LoginPage extends React.Component {
 
     return (
       <View>
-        <Text style={styles.mmm}>{message}</Text>
+        <Text style={styles.message}>{message}</Text>
       </View>
     );
   }
@@ -182,7 +180,7 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     paddingBottom: 5
   },
-  mmm: {
+  message: {
     color: "red"
   }
 });
