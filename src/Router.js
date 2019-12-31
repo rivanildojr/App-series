@@ -4,6 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 
 import LoginScreen from "./pages/LoginScreen";
 import SeriesPage from "./pages/SeriesPage";
+import SerieDetailPage from "./pages/SerieDetailPage";
 
 const AppNavigator = createStackNavigator(
   {
@@ -14,6 +15,15 @@ const AppNavigator = createStackNavigator(
       screen: LoginScreen,
       navigationOptions: {
         title: "Bem vindo!"
+      }
+    },
+    SerieDetail: {
+      screen: SerieDetailPage,
+      navigationOptions: ({ navigation }) => {
+        const { serie } = navigation.state.params;
+        return {
+          title: serie.title
+        };
       }
     }
   },
