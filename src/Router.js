@@ -7,14 +7,14 @@ import SeriesPage from "./pages/SeriesPage";
 
 const AppNavigator = createStackNavigator(
   {
+    Main: {
+      screen: SeriesPage
+    },
     Login: {
       screen: LoginScreen,
       navigationOptions: {
         title: "Bem vindo!"
       }
-    },
-    Main: {
-      screen: SeriesPage
     }
   },
   {
