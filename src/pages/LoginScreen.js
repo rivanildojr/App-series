@@ -25,7 +25,11 @@ import {
   MEASUREMENT_ID
 } from "react-native-dotenv";
 
-export default class LoginPage extends React.Component {
+import { connect } from "react-redux";
+
+import { tryLogin } from "../actions";
+
+class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -62,47 +66,22 @@ export default class LoginPage extends React.Component {
     this.setState({ isLoading: true, message: "" });
     const { email, password } = this.state;
 
-    const loginUserSuccess = user => {
-      this.setState({ message: "Sucesso!" });
-    };
+    this.props
+      .tryLogin({ email, password })
+      .then(user => {
+        if (user) return this.props.navigation.replace("Main");
 
-    const loginUserFailed = error => {
-      this.setState({
-        message: this.getMessageByErrorCode(error.code)
-      });
-    };
-
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(loginUserSuccess)
-      .catch(error => {
-        if (error.code === "auth/user-not-found") {
-          Alert.alert(
-            "Usuário não encontrado",
-            "Deseja criar um cadastro com as informações inseridas?",
-            [
-              {
-                text: "Não",
-                style: "cancel" //IOS
-              },
-              {
-                text: "Sim",
-                onPress: () => {
-                  firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(email, password)
-                    .then(loginUserSuccess)
-                    .catch(loginUserFailed);
-                }
-              }
-            ]
-          );
-          return;
-        }
-        loginUserFailed(error);
+        this.setState({
+          isLoading: false,
+          message: ""
+        });
       })
-      .then(() => this.setState({ isLoading: false }));
+      .catch(error => {
+        this.setState({
+          isLoading: false,
+          message: this.getMessageByErrorCode(error.code)
+        });
+      });
   }
 
   getMessageByErrorCode(errorCode) {
@@ -153,6 +132,8 @@ export default class LoginPage extends React.Component {
             placeholder="user@mail.com"
             value={this.state.email}
             onChangeText={value => this.onChangeHandler("email", value)}
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
         </FormRow>
         <FormRow last>
@@ -184,3 +165,12 @@ const styles = StyleSheet.create({
     color: "red"
   }
 });
+
+// const mapStateToProps = state => ({
+
+// });
+
+// const mapDispatchToProps = dispatch =>
+//   bindActionCreators(, dispatch);
+
+export default connect(null, { tryLogin })(LoginPage);
