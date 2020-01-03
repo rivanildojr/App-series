@@ -17,30 +17,24 @@ const AddSerieCard = ({ serie, isFirstColumn, onNavigate }) => (
     ]}
   >
     <View style={styles.card}>
-      {/* <Image style={styles.image} source={{ uri: serie.img }} /> */}
-      <Text>Aqui vai o nosso dfdfdfdfddsfsdfsdfsfsdfsdfsdfsdsaasdabotão</Text>
+      <Image style={styles.image} source={require("../../resources/add.png")} />
     </View>
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   container: {
-    // Solução 2
-    // flex: 0.5,
-    //Solução 1 width: "50%", padding: 5,
-    width: "50%",
-    padding: 5,
+    width: "100%",
+    padding: 10,
     height: Dimensions.get("window").width / 2
   },
   card: {
-    flex: 1,
-    borderWidth: 1
-    // Solução 2
-    // margin: 10
+    flex: 1
   },
   image: {
     aspectRatio: 1,
-    resizeMode: "cover"
+    width: "100%",
+    height: "100%"
   },
   firstColumn: {
     paddingLeft: 10
