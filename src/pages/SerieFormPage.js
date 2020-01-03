@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, Picker } from "react-native";
 
 import { connect } from "react-redux";
 
@@ -24,6 +24,19 @@ const SerieFormPage = ({ serieForm, setField }) => {
           value={serieForm.img}
           onChangeText={value => setField("img", value)}
         />
+      </FormRow>
+
+      <FormRow>
+        <Picker
+          selectedValue={serieForm.gender}
+          onValueChange={itemValue => {
+            setField("gender", itemValue);
+          }}
+        >
+          <Picker.Item label="Policial" value="police" />
+          <Picker.Item label="Comédia" value="comedy" />
+          <Picker.Item label="Terror" value="horror" />
+        </Picker>
       </FormRow>
     </View>
   );

@@ -12,7 +12,8 @@ export default function userReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_FIELD:
       const newState = { ...state };
-      return (newState[action.field] = action.value);
+      newState[action.field] = action.value;
+      return newState;
     default:
       return state;
   }
