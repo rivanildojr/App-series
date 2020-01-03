@@ -62,9 +62,9 @@ class SerieFormPage extends Component {
                 setField("gender", itemValue);
               }}
             >
-              <Picker.Item label="Policial" value="police" />
-              <Picker.Item label="Comédia" value="comedy" />
-              <Picker.Item label="Terror" value="horror" />
+              <Picker.Item label="Policial" value="Policial" />
+              <Picker.Item label="Comédia" value="Comédia" />
+              <Picker.Item label="Terror" value="Terror" />
             </Picker>
           </FormRow>
 

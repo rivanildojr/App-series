@@ -2,7 +2,7 @@ import { SET_FIELD, SERIE_SAVED_SUCESS } from "../actions";
 
 const INITIAL_STATE = {
   title: "",
-  gender: "police",
+  gender: "Policial",
   rate: 0,
   img: "",
   description: ""
