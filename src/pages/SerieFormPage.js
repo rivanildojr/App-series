@@ -17,6 +17,14 @@ const SerieFormPage = ({ serieForm, setField }) => {
           onChangeText={value => setField("title", value)}
         />
       </FormRow>
+      <FormRow>
+        <TextInput
+          style={styles.input}
+          placeholder="URL da Imagem"
+          value={serieForm.img}
+          onChangeText={value => setField("img", value)}
+        />
+      </FormRow>
     </View>
   );
 };
