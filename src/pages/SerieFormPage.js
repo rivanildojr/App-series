@@ -58,6 +58,17 @@ const SerieFormPage = ({ serieForm, setField }) => {
           step={5}
         />
       </FormRow>
+
+      <FormRow>
+        <TextInput
+          style={styles.input}
+          placeholder="Descrição"
+          value={serieForm.description}
+          onChangeText={value => setField("description", value)}
+          numberOfLines={4}
+          multiline={true}
+        />
+      </FormRow>
     </View>
   );
 };
