@@ -14,9 +14,9 @@ import {
 import { connect } from "react-redux";
 
 import FormRow from "../components/FormRow";
-import { setField } from "../actions";
+import { setField, saveSerie } from "../actions";
 
-const SerieFormPage = ({ serieForm, setField }) => {
+const SerieFormPage = ({ serieForm, setField, saveSerie }) => {
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -79,7 +79,7 @@ const SerieFormPage = ({ serieForm, setField }) => {
           />
         </FormRow>
 
-        <Button title="Salvar" onPress={() => console.log(serieForm)} />
+        <Button title="Salvar" onPress={() => saveSerie(serieForm)} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -103,7 +103,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setField
+  setField,
+  saveSerie
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SerieFormPage);

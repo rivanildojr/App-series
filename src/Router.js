@@ -9,20 +9,14 @@ import SerieFormPage from "./pages/SerieFormPage";
 
 const AppNavigator = createStackNavigator(
   {
-    SerieForm: {
-      screen: SerieFormPage,
-      navigationOptions: {
-        title: "Nova Série!"
-      }
-    },
-    Main: {
-      screen: SeriesPage
-    },
     Login: {
       screen: LoginScreen,
       navigationOptions: {
         title: "Bem vindo!"
       }
+    },
+    Main: {
+      screen: SeriesPage
     },
     SerieDetail: {
       screen: SerieDetailPage,
@@ -31,6 +25,12 @@ const AppNavigator = createStackNavigator(
         return {
           title: serie.title
         };
+      }
+    },
+    SerieForm: {
+      screen: SerieFormPage,
+      navigationOptions: {
+        title: "Nova Série!"
       }
     }
   },

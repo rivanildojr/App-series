@@ -4,3 +4,9 @@ export const setField = (field, value) => ({
   field,
   value
 });
+
+export const SAVE_SERIE = "SAVE_SERIE";
+export const saveSerie = serie => ({
+  type: SAVE_SERIE,
+  serie
+});
