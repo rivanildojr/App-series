@@ -6,11 +6,15 @@ import {
   StyleSheet,
   Image,
   Dimensions,
-  Button
+  Button,
+  View
 } from "react-native";
+
+import { connect } from "react-redux";
 
 import Line from "../components/Line";
 import LongText from "../components/LongText";
+import { deleteSerie } from "../actions";
 
 class SerieDetailPage extends Component {
   render() {
@@ -26,12 +30,26 @@ class SerieDetailPage extends Component {
         <Line label="Nota" content={serie.rate} />
         <LongText label="Descrição" content={serie.description} />
 
-        <Button
-          title="Editar"
-          onPress={() => {
-            navigation.replace("SerieForm", { serieToEdit: serie });
-          }}
-        />
+        <View style={styles.button}>
+          <Button
+            title="Editar"
+            onPress={() => {
+              navigation.replace("SerieForm", { serieToEdit: serie });
+            }}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="Deletar"
+            color="#FF0004FF"
+            onPress={async () => {
+              const hasDeleted = await this.props.deleteSerie(serie);
+              if (hasDeleted) {
+                navigation.goBack();
+              }
+            }}
+          />
+        </View>
       </ScrollView>
     );
   }
@@ -44,7 +62,14 @@ const styles = StyleSheet.create({
   image: {
     aspectRatio: 1,
     resizeMode: "cover"
+  },
+  button: {
+    margin: 10
   }
 });
 
-export default SerieDetailPage;
+const mapDispatchToProps = {
+  deleteSerie
+};
+
+export default connect(null, mapDispatchToProps)(SerieDetailPage);
