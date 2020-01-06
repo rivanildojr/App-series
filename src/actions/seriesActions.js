@@ -2,6 +2,7 @@ import firebase from "@firebase/app";
 import "@firebase/database";
 
 import { Alert } from "react-native";
+import { hasStartedLocationUpdatesAsync } from "expo-location";
 
 export const SET_SERIES = "SET_SERIES";
 const setSeries = series => ({
@@ -16,7 +17,13 @@ export const watchSeries = () => {
       .database()
       .ref(`/users/${currentUser.uid}/series`)
       .on("value", snapshop => {
-        dispatch(setSeries(snapshop.val()));
+        const series = snapshop.val();
+
+        if (!series) {
+          return dispatch(setSeries({}));
+        }
+
+        dispatch(setSeries(series));
       });
   };
 };
