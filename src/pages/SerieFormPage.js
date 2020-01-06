@@ -49,7 +49,9 @@ class SerieFormPage extends Component {
 
     const result = await ImagePicker.launchImageLibraryAsync({
       quality: 0.2,
-      base64: true
+      base64: true,
+      allowsEditing: true,
+      aspect: [1, 1] // Android
     });
 
     if (!result.cancelled) {
