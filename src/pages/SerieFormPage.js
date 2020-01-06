@@ -10,7 +10,8 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   ActivityIndicator,
-  Alert
+  Alert,
+  Image
 } from "react-native";
 
 import * as Permissions from "expo-permissions";
@@ -50,8 +51,9 @@ class SerieFormPage extends Component {
       quality: 0.2,
       base64: true
     });
+
     if (!result.cancelled) {
-      console.log("aqui temos uma imagem! ", result.base64);
+      this.props.setField("img64", result.base64);
     }
   }
 
@@ -75,7 +77,17 @@ class SerieFormPage extends Component {
           </FormRow>
 
           <FormRow>
-            <Button title="Selecione um imagem" onPress={this.pickerImg} />
+            {serieForm.img64 ? (
+              <Image
+                source={{ uri: `data:image/jpeg;base64,${serieForm.img64}` }}
+                style={styles.img}
+              />
+            ) : null}
+
+            <Button
+              title="Selecione um imagem"
+              onPress={() => this.pickerImg()}
+            />
           </FormRow>
 
           <FormRow>
@@ -152,6 +164,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 10,
     paddingBottom: 10
+  },
+  img: {
+    aspectRatio: 1,
+    width: "100%"
   }
 });
 

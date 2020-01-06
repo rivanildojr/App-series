@@ -17,8 +17,11 @@ const SerieCard = ({ serie, isFirstColumn, onNavigate }) => (
     ]}
   >
     <View style={styles.card}>
-      {serie.img ? (
-        <Image style={styles.image} source={{ uri: serie.img }} />
+      {serie.img64 ? (
+        <Image
+          style={styles.image}
+          source={{ uri: `data:image/jpeg;base64,${serie.img64}` }}
+        />
       ) : null}
       <View style={styles.cardTitleWrapper}>
         <Text style={styles.cardTitle}>{serie.title}</Text>
