@@ -22,7 +22,12 @@
       "bundleIdentifier": "com.rivanildojr.appseries"
     },
     "android": {
-      "package": "com.rivanildojr.appseries"
+      "package": "com.rivanildojr.appseries",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     }
   }
 }

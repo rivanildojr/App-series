@@ -41,30 +41,32 @@ class SerieFormPage extends Component {
   }
 
   async pickerImg() {
-    const { status } = await Permissions.askAsync(
-      Permissions.CAMERA_ROLL,
-      Permissions.CAMERA
-    );
+    // Para utilizar a camera
+    // const { status } = await Permissions.askAsync(
+    //   Permissions.CAMERA_ROLL,
+    //   Permissions.CAMERA
+    // );
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (status !== "granted") {
       Alert.alert("Você precisa permitir o acesso!");
       return;
     }
 
     // poder tirar foto com a camera
-    const result = await ImagePicker.launchCameraAsync({
-      quality: 0.2,
-      base64: true,
-      allowsEditing: true,
-      aspect: [1, 1] // Android
-    });
-
-    // Apenas a foto dos arquivos
-    // const result = await ImagePicker.launchImageLibraryAsync({
+    // const result = await ImagePicker.launchCameraAsync({
     //   quality: 0.2,
     //   base64: true,
     //   allowsEditing: true,
     //   aspect: [1, 1] // Android
     // });
+
+    // Apenas a foto dos arquivos
+    const result = await ImagePicker.launchImageLibraryAsync({
+      quality: 0.2,
+      base64: true,
+      allowsEditing: true,
+      aspect: [1, 1] // Android
+    });
 
     if (!result.cancelled) {
       this.props.setField("img64", result.base64);
