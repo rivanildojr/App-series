@@ -13,6 +13,9 @@ import {
   Alert
 } from "react-native";
 
+import * as Permissions from "expo-permissions";
+import * as ImagePicker from "expo-image-picker";
+
 import { connect } from "react-redux";
 
 import FormRow from "../components/FormRow";
@@ -36,6 +39,22 @@ class SerieFormPage extends Component {
     return resetForm();
   }
 
+  async pickerImg() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (status !== "granted") {
+      Alert.alert("Você precisa permitir o acesso!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      quality: 0.2,
+      base64: true
+    });
+    if (!result.cancelled) {
+      console.log("aqui temos uma imagem! ", result.base64);
+    }
+  }
+
   render() {
     const { serieForm, setField, saveSerie, navigation } = this.props;
 
@@ -56,12 +75,7 @@ class SerieFormPage extends Component {
           </FormRow>
 
           <FormRow>
-            <TextInput
-              style={styles.input}
-              placeholder="URL da Imagem"
-              value={serieForm.img}
-              onChangeText={value => setField("img", value)}
-            />
+            <Button title="Selecione um imagem" onPress={this.pickerImg} />
           </FormRow>
 
           <FormRow>
